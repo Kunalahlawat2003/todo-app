@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+    <title>Todo App</title>
+</head>
+<body>
+    <div class="signuppage">
+    <span class="Register">
+    Register Here
+    </span>
+    <div class="container" id="container">
+        <div class="title">SIGN-UP</div>
+        <input type="text" placeholder="Enter Your Email" name="email" id="email"></input><br>
+        <input type="text" placeholder="Enter Your Password" name="Password" id="pass"></input><br>
+        <input type="text" placeholder="Enter Your Name" name="name" id="name"></input><br>
+        <button class="Signupbtn" onclick="signup()"> Submit</button><br>
+        <span class="bottomtitle">Already Signedup? <a href="todo.html">Login</a></span>
+    </div>
+    <div class="signup_message" id="signup_message"></div>
+    </div>
+
+    <script>
+        async function signup(){
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("pass").value;
+            const name = document.getElementById("name").value;
+
+            const response = await axios.post("http://localhost:3000/signup",{
+                email: email,
+                password: password,
+                name: name
+            });  
+
+            if(response.data.message == "You are signed up") {
+                document.getElementById("signup_message").innerHTML = "You are Signed in. Please Login";
+            } if(response.data.message == "user already exists") {
+                 document.getElementById("signup_message").innerHTML = "User already exists";
+            } if(response.data.message == "incorrect format") {
+                document.getElementById("signup_message").innerHTML = "Incorrect format";
+            }
+            }
+    </script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+:root {
+    --background: #09054d;
+    --border: #5F45F2;
+    --container: #332da6;
+  }
+
+body{
+    background-color: #09054d;
+}
+
+.container{
+    border: 5px solid rgb(95, 69, 242);
+    background-color: #332da6;
+    width: 25%;
+    height: 40%;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 37%;
+    top:30%;
+    border-radius: 10px;
+    box-shadow: 1px 0px 17px 0px rgba(0, 0, 0, 0.7);
+}
+
+.login{
+    position: absolute;
+    top: 20%;
+    left: 43%;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 800;
+    font-size: 2.5em;
+    color: white;
+}
+
+.title{
+    color: white;
+    text-align: center;
+    font-size: x-large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    padding-bottom: 25px;
+    padding-top: 20px;
+}
+
+#email{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    width: 70%;
+    height: 10%;
+    border-radius: 5px;
+    left: 13%;
+    margin-bottom: 10px;
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    outline: none;
+    border: 1px solid #e5e5e5;
+}
+
+#email:focus{
+    border: 1px solid black;
+    box-shadow: 0px 0px 0px 2px #242424;
+    background-color: white;
+}
+
+#pass{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    width: 70%;
+    height: 10%;
+    border-radius: 5px;
+    left: 13%;
+    margin-bottom: 10px;
+    gap: 15px;
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    outline: none;
+    border: 1px solid #e5e5e5;
+}
+
+#pass:focus{
+    border: 1px solid black;
+    box-shadow: 0px 0px 0px 2px #242424;
+    background-color: white;
+}
+
+#name{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    width: 70%;
+    height: 10%;
+    border-radius: 5px;
+    left: 13%;
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    outline: none;
+    border: 1px solid #e5e5e5;
+}
+
+#name:focus{
+    border: 1px solid black;
+    box-shadow: 0px 0px 0px 2px #242424;
+    background-color: white;
+}
+
+.Signinbtn{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    width: 40%;
+    height: 10%;
+    border-radius: 5px;
+    left: 28%;
+    margin-bottom: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    transition: 0.5s;
+}
+
+.Signinbtn:hover{
+    color: white;
+    background-color: black;
+}
+
+.bottomtitle{
+    text-align: center;
+    position: relative;
+    left: 25%;
+    bottom: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+}
+
+a{
+    text-decoration: none;
+    color: red;
+    transition: 0.2s;
+}
+
+a:hover{
+    color: black;
+}
+
+/* .loginpage{
+    display: none;
+} */
+
+.todos{
+    border: 5px solid rgb(95, 69, 242);
+    background-color: #332da6;
+    width: 25%;
+    height: 80%;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 37%;
+    top:10%;
+    border-radius: 10px;
+    box-shadow: 1px 0px 17px 0px rgba(0, 0, 0, 0.7);
+    display: none;
+    overflow-y: auto;
+}
+
+.signin_message{
+    text-align: center;
+    position: absolute;
+    color: white;
+    top:74%;
+    left: 39%;
+    display: flex;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: larger;
+}
+
+#toptext{
+    color: white;
+    text-align: center;
+    font-size: x-large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding: 5px;
+}
+
+#inputtodo{
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    display: flex;
+    width: 50%;
+    height: 5%;
+    border-radius: 5px;
+    left: 7.5%;
+    margin-bottom: 10px;
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    outline: none;
+    border: 1px solid #e5e5e5;
+}
+
+#inputtodo:focus{
+    border: 1px solid black;
+    box-shadow: 0px 0px 0px 2px #242424;
+    background-color: white;
+}
+
+#createtodo{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    width: 30%;
+    height: 5%;
+    border-radius: 5px;
+    left: 62.5%;
+    margin-bottom: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    transition: 0.5s;
+    top: 0.5%;
+}
+
+#createtodo:hover{
+    color: white;
+    background-color: black;
+}
+
+.todo{
+    height: 20%;
+    width: 70%;
+    background-color: var(--container);
+    position: relative;
+    left: 13.5%;
+    gap: 30px;
+    display: flex;
+    margin-top: 30px;
+    border: 4px solid var(--border);
+    border-radius: 7px;
+}
+
+.todotitle{
+    text-align: center;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    display: flex;
+}
+
+#todobutton{
+    position: absolute;
+    bottom: 15px;
+    left: 18%;
+    display: flex;
+}
+
+.deletetodo{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 5px;
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    outline: none;
+    border: 1px solid #e5e5e5;
+    width: 35%;
+    height: 5%;
+    color: white;
+    background-color: rgb(251, 31, 31);
+    font-size: 15px;
+}
+
+.deletetodo:hover{
+    color: white;
+    background-color: black;
+}
+
+.edittodo{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 5px;
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    outline: none;
+    border: 1px solid #e5e5e5;
+    width: 35%;
+    height: 5%;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 15px;
+    background-color: rgb(254, 149, 1);
+    color: white;
+}
+
+.edittodo:hover{
+    color: white;
+    background-color: black;
+}
+
+.savetodo{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 5px;
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    outline: none;
+    border: 1px solid #e5e5e5;
+    width: 35%;
+    height: 5%;
+    font-size: 15px;
+    background-color: #9904fc;
+    color: white;
+}
+
+.savetodo:hover{
+    color: white;
+    background-color: black;
+}
+
+.todomarktitle{
+    text-align: center;
+    position: absolute;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    display: flex;
+    top: 32%;
+    left: 5%;
+}
+
+#todomarkbtn{
+    position: absolute;
+    top: 31%;
+    left: 78%;
+    height: 20px;
+    width: 20px;
+    accent-color: red;
+}
+

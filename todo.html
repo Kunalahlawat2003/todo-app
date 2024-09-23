@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+    <title>Todo App</title>
+</head>
+<body>
+    <div class="loginpage">
+    <span class="login">
+        Login Here
+        </span>
+        <div class="container">
+            <div class="title">SIGN-IN</div>
+            <input type="text" placeholder="Enter Your Email" name="email" id="email"></input><br>
+            <input type="text" placeholder="Enter Your Password" name="Password" id="pass"></input><br>
+            <button class="Signinbtn" onclick="signin()"> Submit</button><br>
+            <span class="bottomtitle">Not Registered? <a href="index.html">Signup</a></span>
+        </div>
+        <div class="signin_message" id="signin_message"></div>
+        </div>
+
+        <div class="todos">
+            <div id="toptext">Your Todos</div>
+            <input type="text" placeholder="Enter Todo" id="inputtodo"></input>
+            <button id="createtodo" onclick="createtodo()">Create Todo</button>
+        </div>
+
+        <script>
+            async function signin() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("pass").value;
+            const response = await axios.post("http://localhost:3000/signin", {
+                email: email,
+                password: password
+            });
+
+            if (response.data.token) {
+            localStorage.setItem("token", response.data.token);
+
+            document.querySelector('.loginpage').style.display = 'none';
+            document.querySelector('.todos').style.display = 'block';
+
+            const res = await axios.get("http://localhost:3000/todos", {
+            headers: {
+                token: localStorage.getItem("token")
+            }
+            });
+
+            if (res.data.todos && Array.isArray(res.data.todos)) {
+                
+                const todosContainer = document.querySelector(".todos");
+
+               
+                res.data.todos.forEach(todo => {
+                   
+                    const newTodoDiv = document.createElement("div");
+                    newTodoDiv.className = "todo";
+                    newTodoDiv.setAttribute("data-id", todo._id); 
+
+                    
+                    const todoTitleDiv = document.createElement("div");
+                    todoTitleDiv.className = "todotitle";
+                    todoTitleDiv.innerText = todo.title;
+
+                    
+                    const completedLabel = document.createElement("div");
+                    completedLabel.className = "todomarktitle";
+                    completedLabel.innerText = "Is this Todo completed?";
+                    const todoMarkCheckbox = document.createElement("input");
+                    todoMarkCheckbox.type = "checkbox";
+                    todoMarkCheckbox.id = "todomarkbtn";
+                    todoMarkCheckbox.checked = todo.mark; 
+                    todoMarkCheckbox.addEventListener("change", async () => {
+                        const todoId = newTodoDiv.getAttribute("data-id");
+                        const updatedMark = todoMarkCheckbox.checked;
+                    
+                        try {
+                            const response = await axios.put(`http://localhost:3000/updatetodo/${todoId}`, {
+                                mark: updatedMark
+                            }, {
+                                headers: {
+                                    token: localStorage.getItem("token")
+                                }
+                            });
+                    
+                            if (response.data.message === "Todo updated") {
+                                console.log("Todo updated successfully:", updatedMark);
+                            }
+                        } catch (error) {
+                            console.error("Error updating todo mark:", error);
+                        }
+                    });
+
+                   
+                    const buttonDiv = document.createElement("div");
+                    buttonDiv.id = "todobutton";
+
+                    
+                    const deleteButton = document.createElement("button");
+                    deleteButton.className = "deletetodo";
+                    deleteButton.innerText = "Delete";
+                    deleteButton.addEventListener("click", async () => {
+                        await deleteTodo(newTodoDiv);
+                    });
+
+                   
+                    const editButton = document.createElement("button");
+                    editButton.className = "edittodo";
+                    editButton.innerText = "Edit";
+                    editButton.addEventListener("click", (e) => edittodo(e, newTodoDiv));
+
+                   
+                    const saveButton = document.createElement("button");
+                    saveButton.className = "savetodo";
+                    saveButton.innerText = "Save";
+                    saveButton.addEventListener("click", (e) => savetodo(e, newTodoDiv));
+                   
+                    buttonDiv.appendChild(deleteButton);
+                    buttonDiv.appendChild(editButton);
+                    buttonDiv.appendChild(saveButton);
+
+                    
+                    newTodoDiv.appendChild(todoTitleDiv);
+                    newTodoDiv.appendChild(completedLabel);
+                    newTodoDiv.appendChild(todoMarkCheckbox);
+                    newTodoDiv.appendChild(buttonDiv);
+
+                   
+                    todosContainer.appendChild(newTodoDiv);
+                });
+            }
+        } else if (response.data.message == "User does not exist") {
+            document.getElementById("signin_message").innerHTML = "User does not exist";
+        } else {
+            document.getElementById("signin_message").innerHTML = "Incorrect Credentials";
+        }
+    } 
+
+
+        async function createtodo() {
+            const title = document.getElementById("inputtodo").value;
+            const mark = false;
+
+            try {
+        const response = await axios.post("http://localhost:3000/todo", {
+            title: title,
+            mark: mark
+        }, {
+            headers: {
+                token: localStorage.getItem("token")
+            }
+        });
+        console.log("Response received:", response.data);
+
+        if (response.data.message === "todo created") {
+            console.log("Creating todo with title:", title);
+           
+            const newTodoDiv = document.createElement("div");
+            newTodoDiv.className = "todo";
+            newTodoDiv.setAttribute("data-id", response.data.todoId); 
+
+           
+            const todoTitleDiv = document.createElement("div");
+            todoTitleDiv.className = "todotitle";
+            todoTitleDiv.innerText = title; 
+
+            
+            const completedLabel = document.createElement("div");
+            completedLabel.className = "todomarktitle";
+            completedLabel.innerText = "Is this Todo completed?";
+            const todoMarkCheckbox = document.createElement("input");
+            todoMarkCheckbox.type = "checkbox"; 
+            todoMarkCheckbox.id = "todomarkbtn";
+
+            
+            const buttonDiv = document.createElement("div");
+            buttonDiv.id = "todobutton";
+
+            
+            const deleteButton = document.createElement("button");
+            deleteButton.className = "deletetodo";
+            deleteButton.innerText = "Delete";
+            deleteButton.addEventListener("click", async () => {
+                await deleteTodo(newTodoDiv);
+            });
+
+            
+            const editButton = document.createElement("button");
+            editButton.className = "edittodo";
+            editButton.innerText = "Edit";
+            editButton.addEventListener("click", (e) => edittodo(e, newTodoDiv));
+            
+            const saveButton = document.createElement("button");
+            saveButton.className = "savetodo";
+            saveButton.innerText = "Save";
+            saveButton.addEventListener("click", (e) => savetodo(e, newTodoDiv));
+
+            
+
+            
+            buttonDiv.appendChild(deleteButton);
+            buttonDiv.appendChild(editButton);
+            buttonDiv.appendChild(saveButton);
+
+            
+            newTodoDiv.appendChild(todoTitleDiv);
+            newTodoDiv.appendChild(completedLabel);
+            newTodoDiv.appendChild(todoMarkCheckbox);
+            newTodoDiv.appendChild(buttonDiv);
+
+            
+            document.querySelector(".todos").appendChild(newTodoDiv);
+
+           
+            document.getElementById("inputtodo").value = '';
+            }
+            } catch (error) {
+                console.error("Error creating todo:", error);
+            }
+        }
+
+        function edittodo(event) {
+        const todoDiv = event.target.closest(".todo");
+        const todoTitleDiv = todoDiv.querySelector(".todotitle");
+        const todoMarkCheckbox = todoDiv.querySelector("input[type='checkbox']");
+    
+       
+        const inputField = document.createElement("input");
+        inputField.className = "textarea";
+        inputField.type = "text";
+        inputField.value = todoTitleDiv.innerText;
+    
+        
+        todoTitleDiv.innerHTML = ''; 
+        todoTitleDiv.appendChild(inputField); 
+    
+       
+        const saveButton = todoDiv.querySelector(".savetodo");
+        saveButton.onclick = (e) => savetodo(e, todoDiv); 
+    }
+
+    async function savetodo(event, todoDiv) {
+    const todoId = todoDiv.getAttribute("data-id");
+    const todoTitleDiv = todoDiv.querySelector(".todotitle");
+    const todoMarkCheckbox = todoDiv.querySelector("input[type='checkbox']");
+
+    
+    const updatedTitle = todoTitleDiv.querySelector("input").value;
+    const updatedMark = todoMarkCheckbox.checked;
+
+    try {
+        const response = await axios.put(`http://localhost:3000/updatetodo/${todoId}`, {
+            title: updatedTitle,
+            mark: updatedMark
+        }, {
+            headers: {
+                token: localStorage.getItem("token")
+            }
+        });
+
+        if (response.data.message === "Todo updated") {
+           
+            todoTitleDiv.innerHTML = '';
+            todoTitleDiv.innerText = updatedTitle; 
+            todoMarkCheckbox.checked = updatedMark; 
+            
+           
+            const editButton = todoDiv.querySelector(".edittodo");
+            editButton.innerText = "Edit"; 
+            editButton.onclick = (e) => edittodo(e); 
+        }
+            } catch (error) {
+                console.error("Error saving todo:", error);
+            }
+        }
+
+        async function deleteTodo(todoDiv) {
+            const todoId = todoDiv.getAttribute("data-id");
+            console.log("deleting todo with todo id", todoId);
+            try {
+                const response = await axios.delete(`http://localhost:3000/todo/${todoId}`, {
+                    headers: {
+                        token: localStorage.getItem("token")
+                    }
+                });
+        
+                if (response.data.message === "Todo deleted") {
+                   
+                    todoDiv.remove();
+                    console.log("Todo deleted successfully");
+                }
+            } catch (error) {
+                console.error("Error deleting todo:", error.response ? error.response.data : error.message);
+            }
+        }
+        </script>
+</body>
+</html>

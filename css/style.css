@@ -1,0 +1,156 @@
+body{
+    background-color: #09054d;
+}
+
+.container{
+    border: 5px solid rgb(95, 69, 242);
+    background-color: #332da6;
+    width: 25%;
+    height: 40%;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 37%;
+    top:30%;
+    border-radius: 10px;
+    box-shadow: 1px 0px 17px 0px rgba(0, 0, 0, 0.7);
+}
+
+.Register{
+    position: absolute;
+    top: 20%;
+    left: 42%;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: 800;
+    font-size: 2.5em;
+    color: white;
+}
+
+.title{
+    color: white;
+    text-align: center;
+    font-size: x-large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding: 5px;
+}
+
+#email{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    width: 70%;
+    height: 10%;
+    border-radius: 5px;
+    left: 13%;
+    margin-bottom: 10px;
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    outline: none;
+    border: 1px solid #e5e5e5;
+}
+
+#email:focus{
+    border: 1px solid black;
+    box-shadow: 0px 0px 0px 2px #242424;
+    background-color: white;
+}
+
+#pass{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    width: 70%;
+    height: 10%;
+    border-radius: 5px;
+    left: 13%;
+    margin-bottom: 10px;
+    gap: 15px;
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    outline: none;
+    border: 1px solid #e5e5e5;
+}
+
+#pass:focus{
+    border: 1px solid black;
+    box-shadow: 0px 0px 0px 2px #242424;
+    background-color: white;
+}
+
+#name{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    width: 70%;
+    height: 10%;
+    border-radius: 5px;
+    left: 13%;
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+    outline: none;
+    border: 1px solid #e5e5e5;
+}
+
+#name:focus{
+    border: 1px solid black;
+    box-shadow: 0px 0px 0px 2px #242424;
+    background-color: white;
+}
+
+.Signupbtn{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    width: 40%;
+    height: 10%;
+    border-radius: 5px;
+    left: 28%;
+    margin-bottom: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    transition: 0.5s;
+}
+
+.Signupbtn:hover{
+    color: white;
+    background-color: black;
+}
+
+.bottomtitle{
+    text-align: center;
+    position: relative;
+    left: 22%;
+    bottom: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+}
+
+a{
+    text-decoration: none;
+    color: red;
+    transition: 0.2s;
+}
+
+a:hover{
+    color: black;
+}
+
+.signup_message{
+    text-align: center;
+    position: absolute;
+    color: white;
+    top:74%;
+    left: 39%;
+    display: flex;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: larger;
+}
+
+/* .signuppage{
+    display: none;
+} */
