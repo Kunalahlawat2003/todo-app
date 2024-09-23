@@ -7,6 +7,7 @@ const { z } = require('zod');
 const cors = require('cors');
 require('dotenv').config();
 const axios = require('axios');
+const path = require('path');
 
 const port = process.env.PORT || 3000;
 const mongourl = process.env.MONGO_URL;
