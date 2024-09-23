@@ -32,7 +32,7 @@
             async function signin() {
             const email = document.getElementById("email").value;
             const password = document.getElementById("pass").value;
-            const response = await axios.post("http://localhost:3000/signin", {
+            const response = await axios.post("https://todo-app-f5ja.onrender.com/signin", {
                 email: email,
                 password: password
             });
@@ -43,7 +43,7 @@
             document.querySelector('.loginpage').style.display = 'none';
             document.querySelector('.todos').style.display = 'block';
 
-            const res = await axios.get("http://localhost:3000/todos", {
+            const res = await axios.get("https://todo-app-f5ja.onrender.com/todos", {
             headers: {
                 token: localStorage.getItem("token")
             }
@@ -145,7 +145,7 @@
             const mark = false;
 
             try {
-        const response = await axios.post("http://localhost:3000/todo", {
+        const response = await axios.post("https://todo-app-f5ja.onrender.com/todo", {
             title: title,
             mark: mark
         }, {
@@ -252,7 +252,7 @@
     const updatedMark = todoMarkCheckbox.checked;
 
     try {
-        const response = await axios.put(`http://localhost:3000/updatetodo/${todoId}`, {
+        const response = await axios.put(`https://todo-app-f5ja.onrender.com/updatetodo/${todoId}`, {
             title: updatedTitle,
             mark: updatedMark
         }, {
@@ -281,7 +281,7 @@
             const todoId = todoDiv.getAttribute("data-id");
             console.log("deleting todo with todo id", todoId);
             try {
-                const response = await axios.delete(`http://localhost:3000/todo/${todoId}`, {
+                const response = await axios.delete(`https://todo-app-f5ja.onrender.com/todo/${todoId}`, {
                     headers: {
                         token: localStorage.getItem("token")
                     }
