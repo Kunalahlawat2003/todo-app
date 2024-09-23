@@ -18,6 +18,8 @@ app.use(express.json());
 
 app.use(cors());
 
+app.use(express.static(path.join(__dirname)));
+
 app.post("/signup", async function(req, res) {
     const requirebody = z.object({
         email: z.string().min(3).max(100).email(),
